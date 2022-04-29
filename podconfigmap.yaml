@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podconfigmap
+  labels:
+    name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      
+      envFrom:
+      - configMapRef:
+          name: eng-config
+      env:
+      - name: BASE_URL
+        value: base_url
+      - name: MYSQL_USER
+        value: user
+      - name: MYSQL_PASSWORD
+        value: password
+      - name: MYSQL_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: eng-config
+            key: MYSQL_HOST
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 82

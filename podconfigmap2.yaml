@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podconfigmap2
+  labels:
+    name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+      - name: BASE_URL
+        value: base_url
+      envFrom:
+        - configMapRef:
+            name: eng-config2
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 82
