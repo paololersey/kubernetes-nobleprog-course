@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxv1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxv1
+      type: backend
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: nginxv1
+        type: backend
+        env: prod
+    spec:
+      containers:
+      - name: nginxv1
+        image: gcr.io/google-samples/hello-app:1.0
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
