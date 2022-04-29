@@ -26,3 +26,13 @@ spec:
             name: nginxv2
             port: 
               number: 80
+  - host: demo.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/three"
+        backend:
+          service:
+            name: otherexternal
+            port: 
+              number: 80
